@@ -104,6 +104,7 @@ p { margin: 0 0 1em; }
 .is-solid .brand-sub { color: var(--muted); }
 
 .site-nav { display: flex; align-items: center; gap: 36px; }
+.site-nav a, .brand-name { white-space: nowrap; }
 .site-nav a {
   position: relative;
   font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,.88);
@@ -308,6 +309,10 @@ p { margin: 0 0 1em; }
 /* ==========================================================
    Responsive
    ========================================================== */
+@media (max-width: 1180px) {
+  .site-nav { gap: 22px; }
+}
+
 @media (max-width: 1080px) {
   .legal-grid { grid-template-columns: repeat(3, 1fr); }
   .legal-item:nth-child(4) { border-left: 0; }
