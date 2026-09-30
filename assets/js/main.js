@@ -41,7 +41,7 @@
     });
 
     // Fade sections in as they enter the viewport
-    var targets = document.querySelectorAll('.section-head, .split, .service, .why, .vm, .gold, .facility, .spec-card, .gallery, .legal-grid, .contact');
+    var targets = document.querySelectorAll('.section-head, .about-content, .service, .why, .vm, .gold-head, .gold-card, .facility, .spec-card, .location, .gallery, .about-legal, .contact');
     var reveal = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -73,6 +73,12 @@
       if (expanded || current !== 'all' || i < PREVIEW) t.classList.remove('is-hidden');
     });
     more.hidden = expanded || current !== 'all' || matches.length <= PREVIEW;
+    // Bento rhythm: every group of six opens with one large tile, alternating sides
+    visibleTiles().forEach(function (t, i) {
+      var lead = i % 6 === 0;
+      t.classList.toggle('g-big', lead);
+      t.classList.toggle('g-right', lead && Math.floor(i / 6) % 2 === 1);
+    });
   }
   filterBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
