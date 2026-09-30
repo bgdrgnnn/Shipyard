@@ -12,10 +12,11 @@
   <link rel="icon" type="image/png" href="assets/img/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<a class="skip-link" href="#main-content">Langsung ke konten</a>
 
 <!-- ============ HEADER ============ -->
 <header class="site-header" id="top">
@@ -24,6 +25,7 @@
       <img src="assets/img/logo.png" alt="" width="44" height="44">
       <span class="brand-text">
         <span class="brand-name">PT. Cipta Piramida Mandiri</span>
+        <span class="brand-sub">Shipyard &amp; marine engineering</span>
       </span>
     </a>
     <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false" aria-controls="site-nav">
@@ -40,14 +42,14 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
 <!-- ============ HERO ============ -->
-<section class="hero">
+<section class="hero" aria-labelledby="hero-title">
   <div class="hero-media" aria-hidden="true"></div>
   <div class="container hero-content">
     <p class="eyebrow eyebrow-light">PT. Cipta Piramida Mandiri</p>
-    <h1>Global Standard,<br>Indonesian Pride.</h1>
+    <h1 id="hero-title">Global Standard,<br>Indonesian Pride.</h1>
     <p class="hero-lead">Galangan kapal di Kabupaten Bengkalis, Riau, yang melayani pembangunan kapal baru, reparasi dan perawatan kapal, serta fabrikasi baja.</p>
     <div class="hero-actions">
       <a href="#layanan" class="btn btn-primary">Layanan Kami</a>
@@ -69,11 +71,11 @@
 <!-- ============ ABOUT ============ -->
 <section class="about" id="tentang">
   <div class="about-band">
-    <div class="about-media" aria-hidden="true"></div>
+    <div class="about-media"><img src="assets/img/hero-welding.jpg" alt="Proses pengerjaan kapal oleh tim galangan" loading="lazy"><span class="about-caption">Keahlian lokal. Komitmen pada kualitas.</span></div>
     <div class="container about-inner">
       <div class="about-content">
-        <p class="eyebrow eyebrow-light">Tentang Kami</p>
-        <h2>Galangan kapal nasional di Bengkalis, Riau.</h2>
+        <p class="eyebrow">Tentang Kami</p>
+        <h2>Membangun kapal.<br>Menjaga kepercayaan.</h2>
         <p>PT. Cipta Piramida Mandiri adalah perusahaan nasional berstatus Penanaman Modal Dalam Negeri (PMDN) yang bergerak di bidang pembangunan, reparasi, dan perawatan kapal. Galangan kami berada di Desa Lubuk Muda, Kecamatan Siak Kecil, Kabupaten Bengkalis, dengan kantor di Pekanbaru.</p>
         <h3 class="list-title">Bidang Usaha</h3>
         <ul class="tag-list">
@@ -90,12 +92,14 @@
   <div class="container about-legal" id="legalitas">
     <div class="legal-head">
       <p class="eyebrow">Legalitas</p>
-      <h3>Perizinan usaha resmi dan lengkap.</h3>
+      <h3>Landasan yang jelas.<br>Kepercayaan yang kuat.</h3>
     </div>
     <div class="legal-grid">
-      <div class="legal-item">
+      <div class="legal-item legal-primary">
+        <span class="legal-document" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H5v18h14V8zM14 3v5h5M8 12h8M8 16h5"/></svg></span>
         <span class="legal-label">Nomor Induk Berusaha (NIB)</span>
-        <span class="legal-value mono">9120006562144</span>
+        <span class="legal-value">9120006562144</span>
+        <span class="legal-caption">PT. Cipta Piramida Mandiri</span>
       </div>
       <div class="legal-item">
         <span class="legal-label">Status Penanaman Modal</span>
@@ -205,9 +209,15 @@
 <section class="section gold-section" id="gold-standard">
   <div class="container">
     <div class="gold-head">
-      <p class="eyebrow eyebrow-light">Nilai Perusahaan</p>
-      <h2>The Gold Standard</h2>
-      <p>Empat pilar yang kami pegang dalam setiap pekerjaan.</p>
+      <div class="gold-title">
+        <p class="eyebrow eyebrow-light">Nilai Perusahaan</p>
+        <h2>The <span>Gold</span><br>Standard<span class="gold-period">.</span></h2>
+      </div>
+      <div class="gold-intro">
+        <span class="gold-kicker">Komitmen dalam setiap pekerjaan</span>
+        <p>Empat pilar.<br>Satu standar kerja.</p>
+        <span class="gold-description">Nilai yang memandu cara kami bekerja, membangun kemitraan, dan menjaga kepercayaan Anda.</span>
+      </div>
     </div>
     <div class="gold-grid">
       <article class="gold-card">
@@ -246,6 +256,7 @@
       <h2>Fasilitas dan peralatan galangan.</h2>
     </div>
 
+    <div class="facility-grid">
     <div class="facility">
       <img src="assets/img/yard-area.jpg" alt="Lahan terbuka area yard galangan" loading="lazy">
       <div class="facility-text">
@@ -267,7 +278,7 @@
       <div class="facility-text">
         <h3>Crawler Crane 60 Ton</h3>
         <p>Dua unit <em>crawler crane</em> <strong>Zoomlion ZCC600V</strong> dengan kapasitas angkat masing-masing 60 ton, menjangkau seluruh area yard dan landasan.</p>
-        <table class="spec-table">
+        <details class="spec-details"><summary>Lihat spesifikasi teknis</summary><table class="spec-table">
           <tbody>
             <tr><th>Jumlah unit</th><td>2 unit</td></tr>
             <tr><th>Merek / Model</th><td>Zoomlion ZCC600V</td></tr>
@@ -283,7 +294,7 @@
             <tr><th>Berat operasi</th><td>± 60 Ton</td></tr>
           </tbody>
         </table>
-        <p class="spec-note">Spesifikasi berdasarkan data pabrikan.</p>
+        <p class="spec-note">Spesifikasi berdasarkan data pabrikan.</p></details>
       </div>
     </div>
 
@@ -299,13 +310,15 @@
       </div>
     </div>
 
+    </div>
+
     <div class="specs">
       <div class="spec-card">
         <img src="assets/img/winch.jpg" alt="Hydraulic towing winch 30 ton" loading="lazy">
         <div class="spec-body">
           <h3>Winch Hidrolik 30 Ton</h3>
           <p>Digunakan untuk menarik kapal naik ke landasan dan menurunkannya kembali ke air secara stabil dan terkendali.</p>
-          <table class="spec-table">
+          <details class="spec-details"><summary>Lihat spesifikasi teknis</summary><table class="spec-table">
             <tbody>
               <tr><th>Merek / Seri</th><td>HY / OEM</td></tr>
               <tr><th>Model</th><td>TWG WR40</td></tr>
@@ -322,7 +335,7 @@
               <tr><th>Sistem kontrol</th><td>Local Control Valve</td></tr>
               <tr><th>Estimasi berat kosong</th><td>± 3.500 – 4.500 kg</td></tr>
             </tbody>
-          </table>
+          </table></details>
         </div>
       </div>
       <div class="spec-card">
@@ -330,7 +343,7 @@
         <div class="spec-body">
           <h3>Kompresor Udara 10 Bar</h3>
           <p>Menyuplai udara bertekanan untuk peralatan pneumatik dan proses <em>sandblasting</em>, yaitu pembersihan karat dan cat lama pada lambung kapal.</p>
-          <table class="spec-table">
+          <details class="spec-details"><summary>Lihat spesifikasi teknis</summary><table class="spec-table">
             <tbody>
               <tr><th>Merek</th><td>SHARK</td></tr>
               <tr><th>Model</th><td>GLA 110-10</td></tr>
@@ -347,7 +360,7 @@
               <tr><th>Estimasi berat</th><td>2.550 kg</td></tr>
               <tr><th>Dimensi (P × L × T)</th><td>2.500 × 1.500 × 1.950 mm</td></tr>
             </tbody>
-          </table>
+          </table></details>
         </div>
       </div>
     </div>
@@ -419,8 +432,9 @@
   <div class="container contact">
     <div class="contact-head">
       <p class="eyebrow">Kontak</p>
-      <h2>Hubungi kami.</h2>
+      <h2>Mari bicarakan<br>proyek Anda.</h2>
       <p>Untuk permintaan penawaran atau jadwal kunjungan ke galangan, silakan hubungi kantor kami di Pekanbaru.</p>
+      <a class="btn btn-primary contact-cta" href="https://wa.me/6285263751372" target="_blank" rel="noopener">Konsultasi via WhatsApp <span aria-hidden="true">↗</span></a>
       <ul class="contact-list">
         <li><svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><div><span class="contact-label">Kantor</span><address>Jl. Tanjung Datuk No. 175A, Kel. Pesisir<br>Kec. Lima Puluh, Kota Pekanbaru, Riau</address></div></li>
         <li><svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg><div><span class="contact-label">Telepon / WhatsApp</span><a href="tel:+6285263751372">0852-6375-1372</a></div></li>
