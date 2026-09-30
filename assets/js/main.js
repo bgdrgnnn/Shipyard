@@ -24,6 +24,13 @@
     if (e.target.tagName === 'A') setNav(false);
   });
 
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) { setNav(false); toggle.focus(); }
+  });
+  window.matchMedia('(min-width: 901px)').addEventListener('change', function (e) {
+    if (e.matches) setNav(false);
+  });
+
   // Highlight the nav link of the section in view
   var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
   if ('IntersectionObserver' in window) {
@@ -57,7 +64,7 @@
   }
 
   // Gallery: category filter, "show all", and lightbox
-  var PREVIEW = 12;
+  var PREVIEW = 6;
   var tiles = Array.prototype.slice.call(document.querySelectorAll('.gallery a'));
   var filterBtns = document.querySelectorAll('.gallery-filter button');
   var more = document.querySelector('.gallery-more');
@@ -81,8 +88,9 @@
     });
   }
   filterBtns.forEach(function (btn) {
+    btn.setAttribute('aria-pressed', String(btn.classList.contains('is-active')));
     btn.addEventListener('click', function () {
-      filterBtns.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+      filterBtns.forEach(function (b) { b.classList.toggle('is-active', b === btn); b.setAttribute('aria-pressed', String(b === btn)); });
       current = btn.dataset.filter;
       applyFilter();
     });
@@ -96,7 +104,9 @@
   var box = document.getElementById('lightbox');
   var boxImg = box.querySelector('img');
   var boxCap = box.querySelector('.lightbox-cap');
-  var shown = [], idx = 0;
+  var shown = [], idx = 0, returnFocus;
+  var main = document.querySelector('main');
+  var background = [header, main, document.querySelector('footer'), document.querySelector('.wa-float')];
   function show(i) {
     idx = (i + shown.length) % shown.length;
     var a = shown[idx], alt = a.querySelector('img').alt;
@@ -109,15 +119,30 @@
       e.preventDefault();
       shown = visibleTiles();
       show(shown.indexOf(a));
+      returnFocus = a;
       box.hidden = false;
+      document.body.classList.add('lightbox-open');
+      background.forEach(function (el) { el.inert = true; });
+      box.querySelector('.lightbox-close').focus();
     });
   });
-  function closeBox() { box.hidden = true; boxImg.removeAttribute('src'); }
+  function closeBox() {
+    box.hidden = true; boxImg.removeAttribute('src');
+    document.body.classList.remove('lightbox-open');
+    background.forEach(function (el) { el.inert = false; });
+    if (returnFocus) returnFocus.focus();
+  }
   box.querySelector('.lightbox-prev').addEventListener('click', function (e) { e.stopPropagation(); show(idx - 1); });
   box.querySelector('.lightbox-next').addEventListener('click', function (e) { e.stopPropagation(); show(idx + 1); });
   box.addEventListener('click', function (e) { if (e.target === box || e.target.classList.contains('lightbox-close')) closeBox(); });
   document.addEventListener('keydown', function (e) {
     if (box.hidden) return;
+    if (e.key === 'Tab') {
+      var buttons = box.querySelectorAll('button');
+      var first = buttons[0], last = buttons[buttons.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
     if (e.key === 'Escape') closeBox();
     else if (e.key === 'ArrowLeft') show(idx - 1);
     else if (e.key === 'ArrowRight') show(idx + 1);
