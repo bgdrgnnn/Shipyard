@@ -48,7 +48,7 @@
     });
 
     // Fade sections in as they enter the viewport
-    var targets = document.querySelectorAll('.section-head, .about-content, .service, .why, .vm, .gold-head, .gold-card, .facility, .spec-card, .location, .gallery, .about-legal, .contact');
+    var targets = document.querySelectorAll('.section-head, .about-content, .service, .why, .vm, .gold-head, .gold-card, .facility, .spec-card, .location, .gallery, .contact');
     var reveal = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
