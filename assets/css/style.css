@@ -658,3 +658,9 @@ body.lightbox-open { overflow: hidden; }
 .about-footer .btn { height: auto; min-height: 58px; padding-inline: 22px; }
 .about-footer .btn small { display: none; }
 @media (max-width: 560px) { .about-footer > * { flex: 1 1 100%; } }
+
+/* Yard land-area highlight */
+.area-stat { display: flex; flex-direction: column; gap: 4px; margin: 4px 0 20px; padding: 18px 20px; background: var(--blue-tint); border-left: 3px solid var(--red); border-radius: 4px; }
+.area-value { font-size: clamp(2rem, 3.4vw, 2.6rem); font-weight: 700; color: var(--navy); line-height: 1; letter-spacing: -.02em; }
+.area-value small { font-size: .45em; font-weight: 600; color: var(--blue); letter-spacing: 0; }
+.area-label { font-size: .8rem; color: var(--muted); }
