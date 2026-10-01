@@ -144,7 +144,7 @@ p, blockquote, .vm li { text-align: left; }
   position: absolute; inset: 0;
   background:
     linear-gradient(180deg, rgba(14,36,56,.55) 0%, rgba(14,36,56,.35) 40%, rgba(14,36,56,.92) 100%),
-    url("../img/hero-welding.jpg") center 60% / cover no-repeat;
+    url("../img/hero-ship.jpg") center 55% / cover no-repeat;
 }
 .hero-content { position: relative; padding-top: calc(var(--header-h) + 64px); padding-bottom: 72px; }
 .hero h1 {
