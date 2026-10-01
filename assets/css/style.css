@@ -641,3 +641,7 @@ body.lightbox-open { overflow: hidden; }
   .gold-card:last-child { border-bottom: 0; }
   .gold-icon { margin-bottom: 24px; }
 }
+
+/* Legalitas shows the NIB card only */
+.legal-grid { grid-template-columns: minmax(0, 520px); }
+.legal-grid .legal-primary { grid-row: auto; grid-column: auto; }
