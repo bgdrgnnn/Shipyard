@@ -664,3 +664,17 @@ body.lightbox-open { overflow: hidden; }
 .area-value { font-size: clamp(2rem, 3.4vw, 2.6rem); font-weight: 700; color: var(--navy); line-height: 1; letter-spacing: -.02em; }
 .area-value small { font-size: .45em; font-weight: 600; color: var(--blue); letter-spacing: 0; }
 .area-label { font-size: .8rem; color: var(--muted); }
+
+/* Tagline in caps; spec toggle as a navy pill */
+.brand-sub { letter-spacing: .08em; }
+.spec-details { border-top: 0; margin-top: 20px; }
+.spec-details summary {
+  display: inline-flex; align-items: center; gap: 8px; list-style: none;
+  padding: 10px 16px; background: var(--navy); color: var(--white); border-radius: 4px;
+  font-size: .82rem; font-weight: 600; transition: background-color .2s;
+}
+.spec-details summary::-webkit-details-marker { display: none; }
+.spec-details summary::after { content: "+"; font-size: 1.05rem; line-height: 1; }
+.spec-details[open] summary::after { content: "−"; }
+.spec-details summary:hover { background: #1d3a56; }
+.spec-details[open] summary { padding-bottom: 10px; margin-bottom: 4px; }
