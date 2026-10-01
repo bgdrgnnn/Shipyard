@@ -678,3 +678,9 @@ body.lightbox-open { overflow: hidden; }
 .spec-details[open] summary::after { content: "−"; }
 .spec-details summary:hover { background: #1d3a56; }
 .spec-details[open] summary { padding-bottom: 10px; margin-bottom: 4px; }
+
+/* Land-area highlight in navy, matching the spec toggle */
+.area-stat { background: var(--navy); border-left-color: var(--red); }
+.area-value { color: var(--white); }
+.area-value small { color: var(--blue-light); }
+.area-label { color: #b0c6d7; }
