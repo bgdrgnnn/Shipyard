@@ -685,3 +685,4 @@ body.lightbox-open { overflow: hidden; }
 .area-value small { color: var(--blue-light); }
 .area-label { color: #b0c6d7; }
 .about-media img { object-position: 65% center; }
+.footer-tag { display: block; margin-top: 4px; font-size: 11px; letter-spacing: .08em; color: #aabcca; }
