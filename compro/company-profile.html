@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Company Profile</title>
+<style>
+@font-face { font-family: "DM Sans"; src: url(fonts/DMSans-Regular.ttf); font-weight: 400; }
+@font-face { font-family: "DM Sans"; src: url(fonts/DMSans-Medium.ttf); font-weight: 500; }
+@font-face { font-family: "DM Sans"; src: url(fonts/DMSans-SemiBold.ttf); font-weight: 600; }
+
+:root {
+  --blue: #4B8ABE;
+  --blue-light: #8CC2E6;
+  --blue-tint: #F2F6FA;
+  --red: #F90E08;
+  --navy: #0E2438;
+  --navy-2: #16324B;
+  --gold: #d9b873;
+  --gold-line: #596052;
+  --ink: #15202B;
+  --text: #3B4754;
+  --muted: #6B7785;
+  --line: #DDE4EB;
+  --font: "DM Sans", sans-serif;
+}
+
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  font-size: 9pt;
+  line-height: 1.6;
+  color: var(--text);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  background: #8a96a3;
+}
+img { display: block; max-width: 100%; }
+h1, h2, h3 { margin: 0; color: var(--ink); font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; }
+p { margin: 0 0 1em; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+/* ---------- Page frame ---------- */
+.page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  background: #fff;
+  padding: 16mm 16mm 22mm;
+  break-after: page;
+  display: flex;
+  flex-direction: column;
+}
+.page > * { flex-shrink: 0; }
+.page:last-child { break-after: auto; }
+@media screen { .page { margin: 10mm auto; box-shadow: 0 8px 30px rgba(0,0,0,.25); } }
+
+.page-foot {
+  position: absolute; left: 16mm; right: 16mm; bottom: 9mm;
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 3mm; border-top: 1px solid var(--line);
+  font-size: 7pt; color: var(--muted);
+}
+.page-foot .no { font-weight: 600; color: var(--ink); }
+.page-foot .no::before { content: ""; display: inline-block; width: 5mm; height: 1.5px; background: var(--red); vertical-align: middle; margin-right: 2.5mm; }
+
+.page-dark { background: radial-gradient(ellipse at 95% 0, #314047 0, transparent 55%), #102637; color: #c0ccd5; }
+.page-dark h2, .page-dark h3 { color: #fff; }
+.page-dark .page-foot { border-top-color: rgba(255,255,255,.14); color: #8fa0ae; }
+.page-dark .page-foot .no { color: #fff; }
+.page-tint { background: var(--blue-tint); }
+
+/* ---------- Shared bits ---------- */
+.eyebrow {
+  display: flex; align-items: center; gap: 3mm;
+  margin: 0 0 4mm;
+  font-size: 8pt; font-weight: 500; color: var(--blue);
+}
+.eyebrow::before { content: ""; width: 7mm; height: 1.5px; background: var(--red); }
+.page-dark .eyebrow { color: var(--gold); }
+.page-dark .eyebrow::before { background: var(--gold); }
+
+h2.title { font-size: 26pt; letter-spacing: -0.025em; }
+.lead { font-size: 11pt; line-height: 1.5; color: var(--ink); }
+
+.ph { width: 100%; height: 100%; object-fit: cover; border-radius: 1.5mm; }
+
+.icon { width: 7mm; height: 7mm; color: var(--blue); flex: none; }
+
+/* ---------- Cover ---------- */
+.cover { padding: 0; background: var(--navy); color: #fff; }
+.cover-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 72% 50%; }
+.cover-shade {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(14,36,56,.92) 0%, rgba(14,36,56,.35) 30%, rgba(14,36,56,.25) 48%, rgba(14,36,56,.88) 70%, rgba(14,36,56,.98) 100%);
+}
+.cover-inner { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; padding: 16mm 16mm 0; }
+.cover-brand { display: flex; align-items: center; gap: 4mm; }
+.cover-brand img { width: 15mm; height: auto; }
+.cover-brand span { font-size: 12pt; font-weight: 600; letter-spacing: -0.005em; }
+.cover-title { margin-top: auto; }
+.cover-title .eyebrow { color: var(--blue-light); font-size: 9pt; }
+.cover h1 { color: #fff; font-size: 54pt; line-height: .98; letter-spacing: -0.045em; font-weight: 600; }
+.cover-motto { display: flex; align-items: center; gap: 4mm; margin: 8mm 0 3mm; font-size: 15pt; font-weight: 500; letter-spacing: -0.01em; }
+.cover-motto i { width: 2.2mm; height: 2.2mm; border-radius: 50%; background: var(--red); }
+.cover-tag { font-size: 9pt; color: rgba(255,255,255,.72); margin: 0; }
+.cover-addr {
+  display: grid; grid-template-columns: 1.25fr 1fr; gap: 10mm;
+  margin-top: 14mm; padding: 8mm 0 14mm;
+  border-top: 1px solid rgba(255,255,255,.18);
+  position: relative;
+}
+.cover-addr::before { content: ""; position: absolute; top: -1px; left: 0; width: 42mm; height: 2px; background: var(--red); }
+.cover-addr div { display: flex; gap: 3.5mm; }
+.cover-addr .icon { color: var(--blue-light); width: 6mm; height: 6mm; margin-top: .3mm; }
+.cover-addr b { display: block; font-size: 8pt; font-weight: 600; color: var(--blue-light); margin-bottom: 1mm; }
+.cover-addr p { margin: 0; font-size: 8.5pt; line-height: 1.55; color: rgba(255,255,255,.88); }
+
+/* ---------- About ---------- */
+.about-photos { display: grid; grid-template-columns: 1.55fr 1fr; grid-template-rows: minmax(0,1fr) minmax(0,1fr); gap: 3mm; height: 118mm; margin-bottom: 11mm; }
+.about-photos .big { grid-row: span 2; }
+.about-head { display: grid; grid-template-columns: 1fr 1.6fr; gap: 10mm; align-items: start; margin-bottom: 8mm; }
+.about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; }
+.sub { font-size: 8pt; font-weight: 600; color: var(--ink); margin-bottom: 3mm; }
+.rows li { display: flex; gap: 4mm; padding: 2.6mm 0; border-top: 1px solid var(--line); color: var(--ink); font-weight: 500; font-size: 9.5pt; }
+.rows li:last-child { border-bottom: 1px solid var(--line); }
+.rows li span { color: var(--muted); font-size: 7.5pt; font-weight: 500; width: 5mm; padding-top: .6mm; }
+.legal-list { display: grid; gap: 3mm; }
+.legal-card { border: 1px solid var(--line); background: #f6f8fa; border-radius: 1.5mm; padding: 4mm 5mm; display: flex; gap: 4mm; align-items: center; }
+.legal-card .icon { width: 6mm; height: 6mm; }
+.legal-card p { margin: 0; color: var(--ink); font-weight: 500; font-size: 9pt; line-height: 1.4; }
+.legal-card.primary { background: var(--navy); border-color: var(--navy); }
+.legal-card.primary .icon { color: var(--blue-light); }
+.legal-card.primary small { display: block; font-size: 7.5pt; color: #b0c6d7; font-weight: 400; margin-bottom: .5mm; }
+.legal-card.primary strong { display: block; color: #fff; font-size: 15pt; font-weight: 600; letter-spacing: .01em; }
+
+/* ---------- Why ---------- */
+.why-head { display: grid; grid-template-columns: 1fr 1fr; gap: 12mm; align-items: end; margin-bottom: 10mm; }
+.why-head .lead { margin: 0; padding-left: 6mm; border-left: 1.5px solid var(--red); }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); margin-bottom: 9mm; }
+.why-item { padding: 6mm 6mm 6mm 0; border-bottom: 1px solid var(--line); }
+.why-item:nth-child(even) { padding: 6mm 0 6mm 6mm; border-left: 1px solid var(--line); }
+.why-item h3 { font-size: 11pt; margin: 3.5mm 0 2mm; }
+.why-item p { margin: 0; font-size: 8.8pt; }
+.why-photos { flex: 1 1 0; display: grid; grid-template-columns: 1.5fr 1fr; grid-template-rows: minmax(0,1fr); gap: 3mm; min-height: 0; }
+
+/* ---------- Services ---------- */
+.svc-head { margin-bottom: 8mm; }
+.svc-list { flex: 1 1 0; display: grid; grid-template-rows: repeat(3, minmax(0,1fr)); gap: 5mm; min-height: 0; }
+.svc { display: grid; grid-template-columns: 58mm 1fr; grid-template-rows: minmax(0,1fr); border: 1px solid var(--line); border-radius: 2mm; overflow: hidden; }
+.svc img { width: 100%; height: 100%; object-fit: cover; }
+.svc-body { padding: 6mm 7mm; display: flex; flex-direction: column; justify-content: center; }
+.svc-no { font-size: 8pt; font-weight: 500; color: var(--blue); margin-bottom: 1.5mm; }
+.svc h3 { font-size: 13pt; margin-bottom: 3mm; }
+.svc p { margin: 0; font-size: 8.8pt; line-height: 1.62; }
+
+/* ---------- Gold standard ---------- */
+.gold-head { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; align-items: end; margin-bottom: 10mm; }
+.gold-head h2 { font-size: 40pt; line-height: 1; letter-spacing: -0.045em; }
+.gold-head h2 span { color: var(--gold); }
+.gold-head > p { margin: 0; padding-left: 6mm; border-left: 1px solid #70664f; color: #fff; font-size: 11pt; line-height: 1.5; }
+.gold-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--gold-line); border-radius: 2mm; overflow: hidden; margin-bottom: 9mm; }
+.gold-card { position: relative; padding: 7mm 7mm 6.5mm; background: rgba(255,255,255,.025); }
+.gold-card:nth-child(odd) { border-right: 1px solid var(--gold-line); }
+.gold-card:nth-child(-n+2) { border-bottom: 1px solid var(--gold-line); }
+.gold-card .icon { color: var(--gold); width: 7.5mm; height: 7.5mm; margin-bottom: 4mm; }
+.gold-card .no { position: absolute; top: 6mm; right: 7mm; font-size: 7.5pt; color: #8a8f80; }
+.gold-card h3 { font-size: 11.5pt; margin-bottom: 2mm; }
+.gold-card p { margin: 0; font-size: 8.8pt; }
+.gold-photo { flex: 1 1 0; min-height: 0; }
+.gold-photo img { border-radius: 2mm; filter: saturate(.9); }
+
+/* ---------- Vision & mission ---------- */
+.vm-top { display: grid; grid-template-columns: 62mm 1fr; grid-template-rows: minmax(0,1fr); gap: 10mm; height: 136mm; margin-bottom: 12mm; }
+.vm-vision { display: flex; flex-direction: column; justify-content: center; }
+.vm-vision blockquote { margin: 0; font-size: 16pt; line-height: 1.42; letter-spacing: -0.015em; color: var(--ink); font-weight: 500; }
+.vm-mission h2 { margin-bottom: 6mm; }
+.vm-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10mm; }
+.vm-list li { display: flex; gap: 4mm; padding: 6mm 0; border-top: 1px solid var(--line); font-size: 9.2pt; color: var(--text); }
+.vm-list li span { font-size: 7.5pt; font-weight: 600; color: var(--blue); padding-top: .8mm; }
+
+/* ---------- Facilities ---------- */
+.fac-head { display: grid; grid-template-columns: 1fr 98mm; grid-template-rows: minmax(0,1fr); gap: 8mm; height: 42mm; margin-bottom: 8mm; }
+.fac-head > div { display: flex; flex-direction: column; justify-content: flex-end; }
+.fac-block { display: grid; grid-template-columns: 62mm 1fr; gap: 8mm; padding: 6mm 0; border-top: 1px solid var(--line); }
+.fac-block h3 { font-size: 12pt; margin-bottom: 2.5mm; }
+.fac-block p { margin: 0; font-size: 8.8pt; }
+.fac-block .media { height: 56mm; }
+.fac-block .media.two { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0,1fr); gap: 3mm; }
+.fac-cont { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6mm; }
+.fac-cont h2 { font-size: 16pt; }
+.eq { padding: 6mm 0 0; border-top: 1px solid var(--line); }
+.eq + .eq { margin-top: 7mm; }
+.eq h3 { font-size: 13pt; margin-bottom: 2mm; }
+.eq > p { font-size: 8.8pt; margin-bottom: 5mm; }
+.eq-body { display: grid; grid-template-columns: 70mm 1fr; gap: 8mm; }
+.eq-body .media { height: 76mm; }
+.spec { width: 100%; border-collapse: collapse; font-size: 7.8pt; line-height: 1.3; }
+.spec th, .spec td { text-align: left; padding: 1.25mm 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.spec th { font-weight: 400; color: var(--muted); width: 47%; padding-right: 3mm; }
+.spec td { color: var(--ink); font-weight: 500; }
+.spec tr:first-child th, .spec tr:first-child td { border-top: 1px solid var(--line); }
+
+/* ---------- Legal ---------- */
+.legal-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6mm; }
+.legal-head .eyebrow { margin: 0; }
+.legal-head h2 { font-size: 16pt; }
+.doc { flex: 1 1 0; min-height: 0; display: flex; justify-content: center; align-items: flex-start; }
+.doc img { max-height: 100%; width: auto; background: #fff; border: 1px solid var(--line); box-shadow: 0 3mm 9mm -5mm rgba(20,40,60,.35); }
+.doc-card { align-items: center; }
+.doc-card img { width: 128mm; max-height: none; border-radius: 3mm; }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="page cover">
+  <img class="cover-bg" src="img/cover.jpg" alt="">
+  <div class="cover-shade"></div>
+  <div class="cover-inner">
+    <div class="cover-brand">
+      <img src="img/logo.png" alt="">
+      <span>Cipta Piramida Mandiri</span>
+    </div>
+    <div class="cover-title">
+      <h1>Company<br>Profile</h1>
+      <div class="cover-motto">Global Standard <i></i> Indonesian Pride</div>
+      <p class="cover-tag">Shipbuilding • Ship Repair • Steel Fabrication • Maritime Infrastructure</p>
+    </div>
+    <div class="cover-addr">
+      <div>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <div><b>Shipyard</b><p>Jalan Hangtuah No. 3 RT.006 / RW.003 Dusun Melati, Desa Lubuk Muda, Kecamatan Siak Kecil, Kabupaten Bengkalis, Riau</p></div>
+      </div>
+      <div>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V7l8-4 8 4v14"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg>
+        <div><b>Office</b><p>Jl. Tanjung Datuk No. 175 A, Pekanbaru, Riau</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT US ============ -->
+<section class="page">
+  <div class="about-photos">
+    <img class="ph big" src="img/about-3.jpg" alt="">
+    <img class="ph" src="img/about-1.jpg" alt="">
+    <img class="ph" src="img/about-2.jpg" alt="">
+  </div>
+  <div class="about-head">
+    <div>
+      <p class="eyebrow">01</p>
+      <h2 class="title">About Us</h2>
+    </div>
+    <p class="lead" style="margin-top:9mm">PT. Cipta Piramida Mandiri merupakan perusahaan nasional yang bergerak di bidang:</p>
+  </div>
+  <div class="about-cols">
+    <ul class="rows">
+      <li><span>01</span>Industri Kapal dan Perahu</li>
+      <li><span>02</span>Reparasi Kapal dan Bangunan Terapung</li>
+      <li><span>03</span>Aktivitas Pelayanan Kepelabuhanan Laut</li>
+      <li><span>04</span>Steel Fabrication</li>
+      <li><span>05</span>Marine Support Services</li>
+    </ul>
+    <div>
+      <p class="sub">Perusahaan telah memiliki legalitas usaha lengkap dan resmi, termasuk:</p>
+      <div class="legal-list">
+        <div class="legal-card primary">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H5v18h14V8zM14 3v5h5M8 12h8M8 16h5"/></svg>
+          <div><small>Nomor Induk Berusaha (NIB):</small><strong>9120006562144</strong></div>
+        </div>
+        <div class="legal-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          <p>Status Penanaman Modal Dalam Negeri (PMDN)</p>
+        </div>
+        <div class="legal-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18"/><path d="M5 18v-2a7 7 0 0 1 14 0v2"/><path d="M10 9.5V5h4v4.5"/></svg>
+          <p>Sertifikat Pengoperasian Terminal Untuk Kepentingan Sendiri (TUKS)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">01</span></div>
+</section>
+
+<!-- ============ WHY US ============ -->
+<section class="page">
+  <div class="why-head">
+    <div>
+      <p class="eyebrow">02</p>
+      <h2 class="title">Mengapa<br>Memilih Kami?</h2>
+    </div>
+    <p class="lead">Kami menggabungkan kualitas kelas dunia dengan realitas ekonomi bisnis maritim.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-item">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+      <h3>Kualitas Tanpa Kompromi</h3>
+      <p>Menerapkan standar kontrol kualitas (QC) yang ketat pada setiap tahap produksi, memastikan setiap detail memenuhi spesifikasi teknis dan regulasi internasional.</p>
+    </div>
+    <div class="why-item">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9-9-9z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+      <h3>Harga yang Kompetitif</h3>
+      <p>Menawarkan solusi maritim berkualitas tinggi dengan harga yang sangat kompetitif di pasar.</p>
+    </div>
+    <div class="why-item">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/></svg>
+      <h3>Agility &amp; Responsivitas</h3>
+      <p>Bergerak lebih cepat dalam mengambil keputusan dan menyesuaikan strategi sesuai kebutuhan spesifik setiap klien.</p>
+    </div>
+    <div class="why-item">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><path d="M7 12l3-3 2 2 5-5"/></svg>
+      <h3>Technological Adaptation</h3>
+      <p>Mengadopsi perangkat lunak desain terkini dan teknik konstruksi modular untuk memastikan efisiensi waktu produksi yang maksimal.</p>
+    </div>
+  </div>
+  <div class="why-photos">
+    <img class="ph" src="img/why-1.jpg" alt="">
+    <img class="ph" src="img/why-2.jpg" alt="">
+  </div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">02</span></div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="page page-tint">
+  <div class="svc-head">
+    <p class="eyebrow">03</p>
+    <h2 class="title">Layanan Utama</h2>
+  </div>
+  <div class="svc-list">
+    <article class="svc" style="background:#fff">
+      <img src="img/svc-1.jpg" alt="">
+      <div class="svc-body">
+        <div class="svc-no">01</div>
+        <h3>Precision Shipbuilding</h3>
+        <p>Kami melampaui batas konstruksi kapal konvensional. Setiap unit yang kami bangun di galangan kami adalah perpaduan antara estetika desain naval dan integritas struktural. Dengan mengadopsi metodologi pembangunan berbasis presisi tinggi, kami memastikan setiap kapal yang meninggalkan galangan kamisiap menaklukkan samudera dengan performa optimal dan efisiensi energi yang maksimal.</p>
+      </div>
+    </article>
+    <article class="svc" style="background:#fff">
+      <img src="img/svc-2.jpg" alt="">
+      <div class="svc-body">
+        <div class="svc-no">02</div>
+        <h3>Excellence in Ship Repair &amp; Maintenance</h3>
+        <p>Waktu adalah aset berharga bagi klien kami. Melalui layanan pemeliharaan dan perbaikan yang komprehensif, kami menawarkan restorasi kapal yang presisi dan cepat (high-speed turnaround). Dengan pengawasan teknis yang ketat, kami mengembalikan keandalan armada Anda ke standar tertinggi, meminimalkan waktu henti (downtime), dan memperpanjang siklus hidup aset maritim Anda.</p>
+      </div>
+    </article>
+    <article class="svc" style="background:#fff">
+      <img src="img/svc-3.jpg" alt="">
+      <div class="svc-body">
+        <div class="svc-no">03</div>
+        <h3>Advanced Steel Fabrication</h3>
+        <p>Ketangguhan adalah fondasi utama kami. Fasilitas fabrikasi baja kami menggunakan teknologi pemrosesan modern untuk menghasilkan struktur baja yang memiliki akurasi tinggi. Dari komponen kapal yang rumit hingga struktur industri berskala besar, kualitas fabrikasi kami adalah manifestasi dari ketahanandan detail yang sempurna.</p>
+      </div>
+    </article>
+  </div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">03</span></div>
+</section>
+
+<!-- ============ GOLD STANDARD ============ -->
+<section class="page page-dark">
+  <div class="gold-head">
+    <div>
+      <p class="eyebrow">04</p>
+      <h2>The <span>Gold</span><br>Standard</h2>
+    </div>
+    <p>DNA mengalir dalam setiap aktivitas operasional kami. Kami menerapkan "The Gold Standard" dalam empat pilar utama:</p>
+  </div>
+  <div class="gold-grid">
+    <div class="gold-card">
+      <span class="no">01</span>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M6 21h12M5 7h14"/><path d="M5 7l-3 7a3 3 0 0 0 6 0L5 7zM19 7l-3 7a3 3 0 0 0 6 0l-3-7z"/></svg>
+      <h3>Integritas Mutlak</h3>
+      <p>Transparansi dan kejujuran dalam setiap kesepakatan bisnis.</p>
+    </div>
+    <div class="gold-card">
+      <span class="no">02</span>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/><path d="M15.5 17.5l1.5 1.5 3-3"/></svg>
+      <h3>Profesionalisme Tanpa Batas</h3>
+      <p>Dedikasi ahli yang terakreditasi untuk hasil yang melampaui ekspektasi.</p>
+    </div>
+    <div class="gold-card">
+      <span class="no">03</span>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+      <h3>Efisiensi Cerdas</h3>
+      <p>Optimalisasi sumber daya untuk memberikan nilai tambah nyata bagi klien.</p>
+    </div>
+    <div class="gold-card">
+      <span class="no">04</span>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18"/><path d="M5 18v-2a7 7 0 0 1 14 0v2"/><path d="M10 9.5V5h4v4.5"/></svg>
+      <h3>Keselamatan &amp; HSE</h3>
+      <p>Kami percaya bahwa keberhasilan sejati hanya dicapai melalui lingkungan kerja yang aman dan perlindungan lingkungan yang berkelanjutan. Keselamatan adalah kewajiban fundamental kami.</p>
+    </div>
+  </div>
+  <div class="gold-photo"><img class="ph" src="img/gold-2.jpg" alt=""></div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">04</span></div>
+</section>
+
+<!-- ============ VISION & MISSION ============ -->
+<section class="page">
+  <div class="vm-top">
+    <img class="ph" src="img/gold-1.jpg" alt="">
+    <div class="vm-vision">
+      <p class="eyebrow">05</p>
+      <h2 class="title" style="margin-bottom:7mm">Visi</h2>
+      <blockquote>"Menjadi episentrum inovasi maritim di Asia Tenggara, memperkuat kedaulatan maritim Indonesia, dan diakui secara global sebagai galangan kapal paling terpercaya yang menetapkan standar baru dalam kualitas, keselamatan, dan keberlanjutan."</blockquote>
+    </div>
+  </div>
+  <div class="vm-mission">
+    <h2 class="title">Misi</h2>
+    <ol class="vm-list">
+      <li><span>01</span>Menyampaikan solusi teknik kapal yang inovatif dan berorientasi pada hasil melaluikeunggulan manufaktur.</li>
+      <li><span>02</span>Memberikan jaminan kualitas premium dengan struktur biaya yang kompetitif guna mendukung efisiensi operasional klien.</li>
+      <li><span>03</span>Membangun kepercayaan jangka panjang dengan klien global melalui layanan yang dipersonalisasi dan transparan.</li>
+      <li><span>04</span>Memperkuat posisi Indonesia dalam rantai pasok maritim internasional melalui adopsi teknologi cerdas dan pengembangan talenta lokal yang kompeten.</li>
+    </ol>
+  </div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">05</span></div>
+</section>
+
+<!-- ============ FACILITIES 1 ============ -->
+<section class="page">
+  <div class="fac-head">
+    <div>
+      <p class="eyebrow">06</p>
+      <h2 class="title">Fasilitas<br>Shipyard</h2>
+    </div>
+    <img class="ph" src="img/fac-river.jpg" alt="">
+  </div>
+  <div class="fac-block">
+    <div>
+      <h3>Area Lahan (Yard) Yang Luas</h3>
+      <p>Lahan terbuka yang luas ini berfungsi sebagai ruang utama untuk manuver logistik, tempat penyimpanan material (seperti plat baja, pipa, dan suku cadang), serta lokasi pengerjaan fabrikasi atau perakitan komponen-komponen kapal sebelum dipasang</p>
+    </div>
+    <div class="media"><img class="ph" src="img/fac-yard.jpg" alt=""></div>
+  </div>
+  <div class="fac-block">
+    <div>
+      <h3>Kolam Landasan</h3>
+      <p>Fasilitas struktural (graving dock atau slipway) yang digunakan untuk menempatkan kapal dalam keadaan kering. Kolam ini berfungsi agar teknisi dapat mengakses, menginspeksi, dan memperbaiki bagian bawah lambung kapal (di bawah garis air) secara menyeluruh.</p>
+    </div>
+    <div class="media"><img class="ph" src="img/fac-kolam.jpg" alt=""></div>
+  </div>
+  <div class="fac-block">
+    <div>
+      <h3>Dua Crane Berkapasitas Besar</h3>
+      <p>Dilengkapi dengan 2 Unit Zoomlion ZCC600V berkapasitas masing-masing 60 Ton Alat angkat berat yang menjangkau area yard dan landasan.</p>
+    </div>
+    <div class="media two">
+      <img class="ph" src="img/fac-crane-1.jpg" alt="">
+      <img class="ph" src="img/fac-crane-2.jpg" alt="">
+    </div>
+  </div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">06</span></div>
+</section>
+
+<!-- ============ FACILITIES 2 ============ -->
+<section class="page">
+  <div class="fac-cont">
+    <p class="eyebrow" style="margin:0">07</p>
+    <h2>Fasilitas Shipyard</h2>
+  </div>
+  <div class="eq" style="border-top:0;padding-top:0">
+    <h3>Satu Mesin Winch Kapasitas 30 Ton</h3>
+    <p>Alat penarik mekanis bertenaga besar yang dihubungkan dengan tali kawat baja. Fungsinya secara khusus adalah untuk menarik kapal naik ke daratan (landasan) atau menurunkannya kembali ke air dengan pergerakan yang stabil dan terkendali.</p>
+    <div class="eq-body">
+      <div class="media"><img class="ph" src="img/fac-winch.jpg" alt=""></div>
+      <table class="spec">
+        <tr><th>Merek / Seri</th><td>HY / OEM</td></tr>
+        <tr><th>Model</th><td>TWG WR40</td></tr>
+        <tr><th>Tipe</th><td>Hydraulic Towing Winch</td></tr>
+        <tr><th>Kapasitas Tarik (Rated Pull)</th><td>30 Ton (300 kN)</td></tr>
+        <tr><th>Kapasitas Tahan (Brake Hold)</th><td>± 45 Ton - 60 Ton</td></tr>
+        <tr><th>Diameter Tali Kawat (Rope)</th><td>40 mm</td></tr>
+        <tr><th>Kapasitas Gulungan (Drum)</th><td>± 500 - 1000 meter</td></tr>
+        <tr><th>Kecepatan Tarik (Line Speed)</th><td>0 - 10 m/min</td></tr>
+        <tr><th>Sistem Penggerak</th><td>Motor Hidrolik</td></tr>
+        <tr><th>Tekanan Hidrolik (Pressure)</th><td>± 16 - 20 MPa</td></tr>
+        <tr><th>Aliran Oli (Oil Flow)</th><td>± 120 - 160 L/min</td></tr>
+        <tr><th>Sistem Kopling (Clutch)</th><td>Manual /Jaw Clutch</td></tr>
+        <tr><th>Sistem Kontrol</th><td>Local Control Valve</td></tr>
+        <tr><th>Estimasi Berat Kosong</th><td>± 3.500 - 4.500 kg</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="eq">
+    <h3>Mesin Kompresor 10 Bar</h3>
+    <p>Mesin penghasil udara bertekanan tinggi. Tekanan sebesar 10 bar umumnya digunakan di galangan untuk menyuplai tenaga pada alat-alat perkakas pneumatik dan untuk proses sandblasting (penyemprotan pasir bertekanan) guna mengelupas karat dan sisa cat lama pada badan kapal.</p>
+    <div class="eq-body">
+      <div class="media"><img class="ph" src="img/fac-kompresor.jpg" alt=""></div>
+      <table class="spec">
+        <tr><th>Merek</th><td>SHARK</td></tr>
+        <tr><th>Model</th><td>GLA 110-10</td></tr>
+        <tr><th>Tipe</th><td>Rotary Screw Air Compressor</td></tr>
+        <tr><th>Daya Motor (Power)</th><td>110 kW / 150 HP</td></tr>
+        <tr><th>Tekanan Kerja (Pressure)</th><td>10 Bar (1.0 MPa / 145 PSI)</td></tr>
+        <tr><th>Kapasitas Udara (FAD)</th><td>± 16.8 m³/min (16,800 L/min)</td></tr>
+        <tr><th>Tegangan Listrik</th><td>380 V / 3 Phase / 50 Hz</td></tr>
+        <tr><th>Metode Starter</th><td>Star-Delta / Inverter (VSD)</td></tr>
+        <tr><th>Sistem Pendingin</th><td>Air Cooled (Pendingin Udara)</td></tr>
+        <tr><th>Sistem Penggerak</th><td>Direct Drive</td></tr>
+        <tr><th>Tingkat Kebisingan</th><td>± 72 dB(A)</td></tr>
+        <tr><th>Suhu Udara Keluar</th><td>Suhu Ruang + 15°C</td></tr>
+        <tr><th>Estimasi Berat</th><td>2.550 kg</td></tr>
+        <tr><th>Estimasi Dimensi (P x L x T)</th><td>2500 x 1500 x 1950 mm</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">07</span></div>
+</section>
+
+<!-- ============ LEGAL ============ -->
+<section class="page page-tint">
+  <div class="legal-head"><p class="eyebrow">Legalitas</p><h2>Izin OSS</h2></div>
+  <div class="doc"><img src="img/legal-oss-1.jpg" alt="Izin OSS"></div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">08</span></div>
+</section>
+
+<section class="page page-tint">
+  <div class="legal-head"><p class="eyebrow">Legalitas</p><h2>Izin OSS</h2></div>
+  <div class="doc"><img src="img/legal-oss-2.jpg" alt="Izin OSS"></div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">09</span></div>
+</section>
+
+<section class="page page-tint">
+  <div class="legal-head"><p class="eyebrow">Legalitas</p><h2>Izin OSS</h2></div>
+  <div class="doc"><img src="img/legal-oss-3.jpg" alt="Izin OSS"></div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">10</span></div>
+</section>
+
+<section class="page page-tint">
+  <div class="legal-head"><p class="eyebrow">Legalitas</p><h2>Izin OSS</h2></div>
+  <div class="doc"><img src="img/legal-oss-4.jpg" alt="Izin OSS"></div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">11</span></div>
+</section>
+
+<section class="page page-tint">
+  <div class="legal-head"><p class="eyebrow">Legalitas</p><h2>Izin OSS</h2></div>
+  <div class="doc"><img src="img/legal-oss-5.jpg" alt="Izin OSS"></div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">12</span></div>
+</section>
+
+<section class="page page-tint">
+  <div class="legal-head"><p class="eyebrow">Legalitas</p><h2>Izin OSS</h2></div>
+  <div class="doc"><img src="img/legal-oss-5.jpg" alt="Izin OSS"></div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">13</span></div>
+</section>
+
+<section class="page page-tint">
+  <div class="legal-head"><p class="eyebrow">Legalitas</p><h2>Nomor Induk Berusaha (NIB)</h2></div>
+  <div class="doc"><img src="img/legal-nib-1.jpg" alt="Nomor Induk Berusaha (NIB)"></div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">14</span></div>
+</section>
+
+<section class="page page-tint">
+  <div class="legal-head"><p class="eyebrow">Legalitas</p><h2>Nomor Induk Berusaha (NIB)</h2></div>
+  <div class="doc"><img src="img/legal-nib-2.jpg" alt="Nomor Induk Berusaha (NIB)"></div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">15</span></div>
+</section>
+
+<section class="page page-tint">
+  <div class="legal-head"><p class="eyebrow">Legalitas</p><h2>NPWP Perusahaan</h2></div>
+  <div class="doc doc-card"><img src="img/legal-npwp.jpg" alt="NPWP Perusahaan"></div>
+  <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">16</span></div>
+</section>
+
+
+</body>
+</html>
