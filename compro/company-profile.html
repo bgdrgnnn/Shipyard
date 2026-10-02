@@ -174,7 +174,9 @@ h2.title { font-size: 26pt; letter-spacing: -0.025em; }
 .gold-photo img { border-radius: 2mm; filter: saturate(.9); }
 
 /* ---------- Vision & mission ---------- */
-.vm-photo { height: 104mm; margin-bottom: 11mm; }
+.vm-logo { height: 104mm; margin-bottom: 11mm; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 2mm; position: relative; overflow: hidden; }
+.vm-logo::before { content: ""; position: absolute; left: 0; top: 0; width: 42mm; height: 2px; background: var(--red); }
+.vm-logo img { width: 72mm; height: auto; }
 .vm-row { display: grid; grid-template-columns: 44mm 1fr; gap: 8mm; padding-top: 7mm; border-top: 1px solid var(--line); }
 .vm-row + .vm-row { margin-top: 10mm; }
 .vm-row blockquote { margin: 0; font-size: 14.5pt; line-height: 1.45; letter-spacing: -0.015em; color: var(--ink); font-weight: 500; }
@@ -399,7 +401,7 @@ h2.title { font-size: 26pt; letter-spacing: -0.025em; }
 
 <!-- ============ VISION & MISSION ============ -->
 <section class="page">
-  <div class="vm-photo"><img class="ph" src="../assets/img/dok/tugboat-yard.jpg" alt="" style="object-position:50% 45%"></div>
+  <div class="vm-logo"><img src="../assets/img/og-logo.png" alt="Logo PT. Cipta Piramida Mandiri"></div>
   <div class="vm-row">
     <div>
       <p class="eyebrow">05</p>
