@@ -174,22 +174,21 @@ h2.title { font-size: 26pt; letter-spacing: -0.025em; }
 .gold-photo img { border-radius: 2mm; filter: saturate(.9); }
 
 /* ---------- Vision & mission ---------- */
-.vm-top { display: grid; grid-template-columns: 62mm 1fr; grid-template-rows: minmax(0,1fr); gap: 10mm; height: 136mm; margin-bottom: 12mm; }
-.vm-vision { display: flex; flex-direction: column; justify-content: center; }
-.vm-vision blockquote { margin: 0; font-size: 16pt; line-height: 1.42; letter-spacing: -0.015em; color: var(--ink); font-weight: 500; }
-.vm-mission h2 { margin-bottom: 6mm; }
-.vm-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10mm; }
-.vm-list li { display: flex; gap: 4mm; padding: 6mm 0; border-top: 1px solid var(--line); font-size: 9.2pt; color: var(--text); }
+.vm-photo { height: 104mm; margin-bottom: 11mm; }
+.vm-row { display: grid; grid-template-columns: 44mm 1fr; gap: 8mm; padding-top: 7mm; border-top: 1px solid var(--line); }
+.vm-row + .vm-row { margin-top: 10mm; }
+.vm-row blockquote { margin: 0; font-size: 14.5pt; line-height: 1.45; letter-spacing: -0.015em; color: var(--ink); font-weight: 500; }
+.vm-list li { display: flex; gap: 5mm; padding: 3.2mm 0; border-bottom: 1px solid var(--line); font-size: 9.2pt; color: var(--text); }
+.vm-list li:first-child { padding-top: 1mm; }
+.vm-list li:last-child { border-bottom: 0; }
 .vm-list li span { font-size: 7.5pt; font-weight: 600; color: var(--blue); padding-top: .8mm; }
 
 /* ---------- Facilities ---------- */
-.fac-head { display: grid; grid-template-columns: 1fr 98mm; grid-template-rows: minmax(0,1fr); gap: 8mm; height: 42mm; margin-bottom: 8mm; }
-.fac-head > div { display: flex; flex-direction: column; justify-content: flex-end; }
+.fac-head { margin-bottom: 8mm; }
 .fac-block { display: grid; grid-template-columns: 62mm 1fr; gap: 8mm; padding: 6mm 0; border-top: 1px solid var(--line); }
 .fac-block h3 { font-size: 12pt; margin-bottom: 2.5mm; }
 .fac-block p { margin: 0; font-size: 8.8pt; }
-.fac-block .media { height: 56mm; }
-.fac-block .media.two { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0,1fr); gap: 3mm; }
+.fac-block .media { height: 61mm; }
 .fac-cont { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6mm; }
 .fac-cont h2 { font-size: 16pt; }
 .eq { padding: 6mm 0 0; border-top: 1px solid var(--line); }
@@ -400,16 +399,18 @@ h2.title { font-size: 26pt; letter-spacing: -0.025em; }
 
 <!-- ============ VISION & MISSION ============ -->
 <section class="page">
-  <div class="vm-top">
-    <img class="ph" src="../assets/img/dok/tugboat-yard.jpg" alt="" style="object-position:42% 50%">
-    <div class="vm-vision">
+  <div class="vm-photo"><img class="ph" src="../assets/img/dok/tugboat-yard.jpg" alt="" style="object-position:50% 45%"></div>
+  <div class="vm-row">
+    <div>
       <p class="eyebrow">05</p>
-      <h2 class="title" style="margin-bottom:7mm">Visi</h2>
-      <blockquote>"Menjadi episentrum inovasi maritim di Asia Tenggara, memperkuat kedaulatan maritim Indonesia, dan diakui secara global sebagai galangan kapal paling terpercaya yang menetapkan standar baru dalam kualitas, keselamatan, dan keberlanjutan."</blockquote>
+      <h2 class="title">Visi</h2>
     </div>
+    <blockquote>"Menjadi episentrum inovasi maritim di Asia Tenggara, memperkuat kedaulatan maritim Indonesia, dan diakui secara global sebagai galangan kapal paling terpercaya yang menetapkan standar baru dalam kualitas, keselamatan, dan keberlanjutan."</blockquote>
   </div>
-  <div class="vm-mission">
-    <h2 class="title">Misi</h2>
+  <div class="vm-row">
+    <div>
+      <h2 class="title">Misi</h2>
+    </div>
     <ol class="vm-list">
       <li><span>01</span>Menyampaikan solusi teknik kapal yang inovatif dan berorientasi pada hasil melalui keunggulan manufaktur.</li>
       <li><span>02</span>Memberikan jaminan kualitas premium dengan struktur biaya yang kompetitif guna mendukung efisiensi operasional klien.</li>
@@ -427,7 +428,6 @@ h2.title { font-size: 26pt; letter-spacing: -0.025em; }
       <p class="eyebrow">06</p>
       <h2 class="title">Fasilitas<br>Shipyard</h2>
     </div>
-    <img class="ph" src="../assets/img/dok/tongkang-landasan.jpg" alt="">
   </div>
   <div class="fac-block">
     <div>
@@ -448,10 +448,7 @@ h2.title { font-size: 26pt; letter-spacing: -0.025em; }
       <h3>Dua Crane Berkapasitas Besar</h3>
       <p>Dilengkapi dengan 2 Unit Zoomlion ZCC600V berkapasitas masing-masing 60 Ton. Alat angkat berat yang menjangkau area yard dan landasan.</p>
     </div>
-    <div class="media two">
-      <img class="ph" src="../assets/img/crane.jpg" alt="">
-      <img class="ph" src="../assets/img/dok/crane-konstruksi.jpg" alt="">
-    </div>
+    <div class="media"><img class="ph" src="../assets/img/crane.jpg" alt=""></div>
   </div>
   <div class="page-foot"><span>PT. Cipta Piramida Mandiri</span><span class="no">06</span></div>
 </section>
