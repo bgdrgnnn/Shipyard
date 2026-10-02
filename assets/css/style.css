@@ -686,3 +686,6 @@ body.lightbox-open { overflow: hidden; }
 .area-label { color: #b0c6d7; }
 .about-media img { object-position: 65% center; }
 .footer-tag { display: block; margin-top: 4px; font-size: 11px; letter-spacing: .08em; color: #aabcca; }
+
+/* Readable eyebrow labels on dark backgrounds */
+.section-dark .eyebrow, .eyebrow.eyebrow-light { color: #b7d8ef; }
